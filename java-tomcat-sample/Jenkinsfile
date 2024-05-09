@@ -12,19 +12,19 @@ pipeline {
                 }
             }
         }
-        stage('Deploy in Staging Environment'){
+        stage('Deploy_APPlication_STaging'){
             steps{
-                build job: 'Deploy_Application_Staging_Env'
+                build job: 'Deploy_APPlication_STaging'
 
             }
-            
+
         }
-        stage('Deploy to Production'){
+        stage('Deploy_APPlication_PROD'){
             steps{
                 timeout(time:5, unit:'DAYS'){
                     input message:'Approve PRODUCTION Deployment?'
                 }
-                build job: 'Deploy_Application_Prod_Env'
+                build job: 'Deploy_APPlication_PROD'
             }
         }
     }
