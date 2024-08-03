@@ -1,19 +1,11 @@
-# Each instruction in this file generates a new layer that gets pushed to your local image cache
-# The line below states we will base our new image on the Latest Official Ubuntu 
-FROM ubuntu:latest
+FROM python:3
 
-# Identify the maintainer of an image
-LABEL version="0.0.1"
-LABEL maitainer="anshulc55@gmail.com"
+WORKDIR /usr/src/app
 
-# Update the image to the latest packages
-RUN  apt-get update && apt-get upgrade -y
+COPY python.py ./
 
-# Install NGINX to test.
-RUN apt-get install nginx -y
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose port 80
-EXPOSE 80
+COPY . .
 
-# Last is the actual command to start up NGINX within our Container
-CMD [ "nginx", "-g", "daemon off;"]
+CMD [ "python", "./python.py" ]
